@@ -1,2 +1,2 @@
 include LICENSE
-include tap_fastly/*.json
+include tap_pagerduty/*.json
