@@ -1,0 +1,477 @@
+{
+  "properties": {
+    "id":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "type":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "summary":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "self":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "html_url":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "created_at":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "status":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "resolved_at":{
+      "type": [
+        "null",
+        "string"
+      ],
+      "format":"date-time"
+    },
+    "alert_key":{
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "suppressed":{
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "service": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "self": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "html_url": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "severity": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "incident": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "self": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "html_url": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "first_trigger_log_entry":{
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "self": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "html_url": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "body": {
+      "type":[
+        "null",
+        "object"
+      ],
+      "properties": {
+        "context": {
+          "type": [
+            "null",
+            "array"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "type": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "href": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "text": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        },
+        "details": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "url": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "tags": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "service": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "service_name": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "sentry:user": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "sentry:release": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "logger": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "level": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "enviroment": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
+              }
+            },
+            "release": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "project": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "platform": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "event_id": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "datetime": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "date-time"
+            },
+            "culprit": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        },
+        "cef_details": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "client": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "client_url": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "contexts": {
+              "type": [
+                "null",
+                "array"
+              ],
+              "items": {
+                "properties": {
+                  "type": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "text": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "href": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  }
+                },
+                "type": [
+                  "null",
+                  "object"
+                ]
+              }
+            },
+            "dedup_key": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "description": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "details": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "url": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
+              }
+            },
+            "message": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "mutation": {
+              "type": [
+                "null",
+                "array"
+              ]
+            },
+            "version": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        },
+        "type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "integration": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "self": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "html_url": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "privilege": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+
+  },
+  "type":[
+    "null",
+    "object"
+  ]
+}
