@@ -60,7 +60,7 @@
           "escalation_delay_in_minutes": {
             "type": [
               "null",
-              "string"
+              "integer"
             ]
           },
           "targets": {
