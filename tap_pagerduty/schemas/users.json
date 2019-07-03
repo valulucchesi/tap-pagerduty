@@ -51,7 +51,7 @@
     "invitation_sent": {
       "type": [
         "null",
-        "string"
+        "boolean"
       ]
     },
     "job_title": {

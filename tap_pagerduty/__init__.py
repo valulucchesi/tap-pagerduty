@@ -105,7 +105,7 @@ def main():
         config = args.config
         state = {
             "bookmarks": {
-                "bills": {"start_time": config["start_date"]}
+
             }
         }
         state.update(args.state)

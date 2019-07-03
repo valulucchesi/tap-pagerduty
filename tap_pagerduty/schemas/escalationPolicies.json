@@ -40,75 +40,69 @@
         "string"
       ]
     },
-    "escalation_rules": {
-      "type": [
+    "escalation_rules":{
+      "type":[
         "null",
         "array"
       ],
-      "items": {
-        "type": [
+      "items":{
+        "type":[
           "null",
           "object"
         ],
-        "properties": {
-          "id": {
-            "type": [
+        "properties":{
+          "id":{
+            "type":[
               "null",
               "string"
             ]
           },
-          "escalation_delay_in_minutes": {
-            "type": [
+          "escalation_delay_in_minutes":{
+            "type":[
               "null",
               "integer"
             ]
           },
-          "targets": {
-            "type": [
+          "targets":{
+            "type":[
               "null",
               "array"
             ],
-            "items": {
-              "type": [
+            "items":{
+              "type":[
                 "null",
-                "array"
+                "object"
               ],
-              "items": {
-                "type": [
-                  "null",
-                  "object"
-                ],
-                "properties": {
-                  "id": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "type": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "summary": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "self": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "html_url": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  }
+              "properties":{
+                "id":{
+                  "type":[
+                    "null",
+                    "string"
+                  ]
+                },
+                "type":{
+                  "type":[
+                    "null",
+                    "string"
+                  ]
+                },
+                "summary":{
+                  "type":[
+                    "null",
+                    "string"
+                  ]
+                },
+                "self":{
+                  "type":[
+                    "null",
+                    "string"
+                  ]
+                },
+                "html_url":{
+                  "type":[
+                    "null",
+                    "string"
+                  ]
                 }
               }
             }

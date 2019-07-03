@@ -1,6 +1,7 @@
 import os
 import json
 import asyncio
+import urllib
 from pathlib import Path
 from itertools import repeat
 from urllib.parse import urljoin
@@ -10,6 +11,7 @@ import requests
 import pendulum
 from singer.bookmarks import write_bookmark, get_bookmark
 from pendulum import datetime, period
+import datetime
 
 
 class PagerdutyAuthentication(requests.auth.AuthBase):
@@ -46,52 +48,125 @@ class PagerdutyClient:
         return response
 
 
-    def incidents(self):
+    def incidents(self, state):
         try:
-            incidents = self._get(f"incidents")
-            return incidents.json()
+            bookmark = get_bookmark(state, "incidents", "since")
+            query= f"incidents?limit=100&total=true"
+            if bookmark:
+                query += "&since=" + urllib.parse.quote(bookmark) + "&utc=true"
+            incidents = self._get(query)
+            iterable = incidents.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                incidents = self._get(query)
+                iterable = incidents.json()
+                result += iterable
+            return result
         except:
             return None
 
     def alerts(self, incident_id):
         try:
-            alerts = self._get(f"incidents/{incident_id}/alerts")
-            return alerts.json()
+            query = f"incidents/{incident_id}/alerts?limit=100&total=true"
+            alerts = self._get(query)
+            iterable = alerts.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                alerts = self._get(query)
+                iterable = alerts.json()
+                result += iterable
+            return result
         except:
             return None
 
     def services(self):
         try:
-            services = self._get(f"services")
-            return services.json()
+            query = f"services?limit=100&total=true"
+            services = self._get(query)
+            iterable = services.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                services = self._get(query)
+                iterable = services.json()
+                result += iterable
+            return result
         except:
             return None
 
     def escalationPolicies(self):
         try:
-            policies = self._get(f"escalation_policies")
-            return policies.json()
+            query = f"escalation_policies?limit=100&total=true"
+            policies = self._get(query)
+            iterable = policies.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                policies = self._get(query)
+                iterable = policies.json()
+                result += iterable
+            return result
         except:
             return None
 
     def teams(self):
         try:
-            teams = self._get(f"teams")
-            return teams.json()
+            query = f"teams?limit=100&total=true"
+            teams = self._get(query)
+            iterable = teams.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                teams = self._get(query)
+                iterable = teams.json()
+                result += iterable
+            return result
         except:
             return None
 
     def users(self):
         try:
-            users = self._get(f"users")
-            return users.json()
+            query = f"users?limit=100&total=true"
+            users = self._get(query)
+            iterable = users.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                users = self._get(query)
+                iterable = users.json()
+                result += iterable
+            return result
         except:
             return None
 
     def vendors(self):
         try:
-            vendors = self._get(f"vendors")
-            return vendors.json()
+            query = f"vendors?limit=100&total=true"
+            vendors = self._get(query)
+            iterable = vendors.json()
+            result = iterable
+            offset = 0
+            while iterable['more']:
+                offset = offset + result['limit']
+                query += "&offset=" + str(offset)
+                vendors = self._get(query)
+                iterable = vendors.json()
+                result += iterable
+            return result
         except:
             return None
 
@@ -123,10 +198,11 @@ class PagerdutySync:
         loop = asyncio.get_running_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents)
+        incidents = await loop.run_in_executor(None, self.client.incidents, self.state)
         if incidents:
             for incident in incidents['incidents']:
                 singer.write_record(stream, incident)
+            self.state = write_bookmark(self.state, stream, "since", datetime.datetime.utcnow().isoformat())
 
     async def sync_alerts(self, schema, period: pendulum.period = None):
         """Alerts per incidents."""
@@ -134,7 +210,7 @@ class PagerdutySync:
         loop = asyncio.get_running_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents)
+        incidents = await loop.run_in_executor(None, self.client.incidents, self.state)
         if incidents:
             for incident in incidents['incidents']:
                 alerts = await loop.run_in_executor(None, self.client.alerts, incident['id'])

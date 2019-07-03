@@ -225,7 +225,7 @@
             "object"
           ],
           "properties": {
-            "url": {
+            "user": {
               "type": [
                 "null",
                 "string"
@@ -234,66 +234,40 @@
             "tags": {
               "type": [
                 "null",
-                "object"
-              ],
-              "properties": {
-                "service": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "service_name": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "sentry:user": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "sentry:release": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "logger": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "level": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                },
-                "enviroment": {
-                  "type": [
-                    "null",
-                    "string"
-                  ]
-                }
-              }
+                "string"
+              ]
             },
-            "release": {
+            "title": {
               "type": [
                 "null",
                 "string"
               ]
             },
-            "project": {
+            "query": {
               "type": [
                 "null",
                 "string"
               ]
             },
-            "platform": {
+            "priority": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "org": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "monitor_state": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "event_type": {
               "type": [
                 "null",
                 "string"
@@ -305,14 +279,7 @@
                 "string"
               ]
             },
-            "datetime": {
-              "type": [
-                "null",
-                "string"
-              ],
-              "format": "date-time"
-            },
-            "culprit": {
+            "body": {
               "type": [
                 "null",
                 "string"
