@@ -68,7 +68,7 @@ def get_selected_streams(catalog):
 def create_sync_tasks(config, state, catalog):
     auth = PagerdutyAuthentication(config["api_token"])
     client = PagerdutyClient(auth)
-    sync = PagerdutySync(client, state)
+    sync = PagerdutySync(client, state, config)
 
     selected_stream_ids = get_selected_streams(catalog)
     sync_tasks = (sync.sync(stream.tap_stream_id, stream.schema)

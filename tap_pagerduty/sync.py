@@ -12,6 +12,7 @@ import pendulum
 from singer.bookmarks import write_bookmark, get_bookmark
 from pendulum import datetime, period
 import datetime
+from dateutil import relativedelta
 
 
 class PagerdutyAuthentication(requests.auth.AuthBase):
@@ -48,22 +49,50 @@ class PagerdutyClient:
         return response
 
 
-    def incidents(self, state):
+    def incidents(self, state, config):
         try:
             bookmark = get_bookmark(state, "incidents", "since")
-            query= f"incidents?limit=100&total=true"
+            query_base = f"incidents?limit=100&total=true&utc=true"
             if bookmark:
-                query += "&since=" + urllib.parse.quote(bookmark) + "&utc=true"
+                start_date = "&since=" + urllib.parse.quote(bookmark) + "&utc=true"
+            else:
+                start_date = datetime.datetime.strptime(config['start_date'], '%Y-%m-%d')
+                #query += "&since=" + urllib.parse.quote(start_date) + '&until='+ datetime.datetime.utcnow().isoformat()
+            r = relativedelta.relativedelta(datetime.datetime.utcnow(),start_date)
+            result = {}
+            if r.years > 0 or r.months >= 5:
+                while r.years > 0 or r.months >= 5:
+                    until = (start_date + datetime.timedelta(5*365/12))
+                    query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + "&until="+ urllib.parse.quote(until.isoformat())
+                    incidents = self._get(query)
+                    iterable = incidents.json()
+                    if 'incidents' in result:
+                        result['incidents'].extend(iterable['incidents'])
+                    else:
+                        result = iterable
+                    offset = 0
+                    while iterable['more']:
+                        offset = offset + result['limit']
+                        query += "&offset=" + str(offset)
+                        incidents = self._get(query)
+                        iterable = incidents.json()
+                        result['incidents'].extend(iterable['incidents'])
+                    start_date = until
+                    r = relativedelta.relativedelta(datetime.datetime.utcnow(), start_date)
+            query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + '&until='+ urllib.parse.quote(datetime.datetime.utcnow().isoformat())
             incidents = self._get(query)
             iterable = incidents.json()
-            result = iterable
+            if 'incidents' in result:
+                result['incidents'].extend(iterable['incidents'])
+            else:
+                result = iterable
             offset = 0
             while iterable['more']:
                 offset = offset + result['limit']
                 query += "&offset=" + str(offset)
                 incidents = self._get(query)
                 iterable = incidents.json()
-                result += iterable
+                result['incidents'].extend(iterable['incidents'])
             return result
         except:
             return None
@@ -171,9 +200,10 @@ class PagerdutyClient:
             return None
 
 class PagerdutySync:
-    def __init__(self, client: PagerdutyClient, state={}):
+    def __init__(self, client: PagerdutyClient, state={}, config={}):
         self._client = client
         self._state = state
+        self._config = config
 
     @property
     def client(self):
@@ -182,6 +212,10 @@ class PagerdutySync:
     @property
     def state(self):
         return self._state
+
+    @property
+    def config(self):
+        return self._config
 
     @state.setter
     def state(self, value):
@@ -198,7 +232,7 @@ class PagerdutySync:
         loop = asyncio.get_running_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents, self.state)
+        incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
         if incidents:
             for incident in incidents['incidents']:
                 singer.write_record(stream, incident)
@@ -210,7 +244,7 @@ class PagerdutySync:
         loop = asyncio.get_running_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents, self.state)
+        incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
         if incidents:
             for incident in incidents['incidents']:
                 alerts = await loop.run_in_executor(None, self.client.alerts, incident['id'])

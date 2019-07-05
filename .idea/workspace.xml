@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9bde862a-1915-4ba8-91a4-1507cf4083be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/tap_pagerduty/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tap_pagerduty/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tap_pagerduty/schemas/alerts.json" beforeDir="false" afterPath="$PROJECT_DIR$/tap_pagerduty/schemas/alerts.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json" beforeDir="false" afterPath="$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tap_pagerduty/schemas/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/tap_pagerduty/schemas/users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tap_pagerduty/sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/tap_pagerduty/sync.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
+            <state relative-caret-position="186">
+              <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
               <folding>
                 <element signature="n#!!block;n#escalation_rules#0;n#!!block;n#properties#0;n#!!top" />
               </folding>
@@ -58,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tap_pagerduty/sync.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="52" column="41" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="41" />
+            <state relative-caret-position="-1610">
+              <caret line="55" column="24" lean-forward="true" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -73,11 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_pagerduty/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="107" selection-start-line="107" selection-end-line="107" />
-              <folding>
-                <element signature="e#23#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -103,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="163">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
             </state>
           </provider>
         </entry>
@@ -135,9 +129,13 @@
       <find>invitation_sent</find>
       <find>monitor</find>
       <find>tags</find>
-      <find>escalation_delay_in_minutes</find>
-      <find>state</find>
       <find>escalation_r</find>
+      <find>state</find>
+      <find>escalation_delay_in_minutes</find>
+      <find>incidents</find>
+      <find>97</find>
+      <find>number</find>
+      <find>incident_number</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,9 +148,9 @@
         <option value="$PROJECT_DIR$/MANIFEST.in" />
         <option value="$PROJECT_DIR$/tap_pagerduty/schemas/users.json" />
         <option value="$PROJECT_DIR$/tap_pagerduty/schemas/alerts.json" />
-        <option value="$PROJECT_DIR$/tap_pagerduty/sync.py" />
-        <option value="$PROJECT_DIR$/tap_pagerduty/__init__.py" />
         <option value="$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json" />
+        <option value="$PROJECT_DIR$/tap_pagerduty/__init__.py" />
+        <option value="$PROJECT_DIR$/tap_pagerduty/sync.py" />
       </list>
     </option>
   </component>
@@ -271,7 +269,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="952" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25579977" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -282,8 +279,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.50348836" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.33023256" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.50348836" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.34418604" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -306,18 +303,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tap_pagerduty/sync.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tap_pagerduty/sync.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tap_pagerduty/sync.py</url>
-          <line>89</line>
-          <option name="timeStamp" value="3" />
+          <line>95</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -325,47 +312,47 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>query += &quot;&amp;offset=&quot; + offset</expression-string>
+        <expression-string>result</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>except</expression-string>
+        <expression-string>result['incidents'] = result['incidents'].extend(iterable['incidents'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>execept</expression-string>
+        <expression-string>result['incidents'].extend(iterable['incidents'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>execpt</expression-string>
+        <expression-string>result['incidents'].extends(iterable['incidents'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>incidents.json()['more']</expression-string>
+        <expression-string>dict(iterable['incidents'] + result['incidents'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>incidents.json().more</expression-string>
+        <expression-string>iterable['incidents'] + result['incidents']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>incidents.json()</expression-string>
+        <expression-string>retorno =iterable['incidents'] + result['incidents']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>incidents._content</expression-string>
+        <expression-string>result= iterable['incidents'] + result['incidents']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>incidents._content.incidents</expression-string>
+        <expression-string>resultiterable['incidents'] + result['incidents']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -442,19 +429,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py">
+    <entry file="file://$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tap_pagerduty/sync.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="52" column="41" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="41" />
+        <state relative-caret-position="186">
+          <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="n#!!block;n#escalation_rules#0;n#!!block;n#properties#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -475,20 +455,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tap_pagerduty/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-          <folding>
-            <element signature="e#23#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_pagerduty/schemas/escalationPolicies.json">
+    <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
+        <state relative-caret-position="163">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_pagerduty/sync.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1610">
+          <caret line="55" column="24" lean-forward="true" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
           <folding>
-            <element signature="n#!!block;n#escalation_rules#0;n#!!block;n#properties#0;n#!!top" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
