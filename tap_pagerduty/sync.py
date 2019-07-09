@@ -229,7 +229,7 @@ class PagerdutySync:
     async def sync_incidents(self, schema):
         """Incidents."""
         stream = "incidents"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
         incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
@@ -241,7 +241,7 @@ class PagerdutySync:
     async def sync_alerts(self, schema, period: pendulum.period = None):
         """Alerts per incidents."""
         stream = "alerts"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
         incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
@@ -256,7 +256,7 @@ class PagerdutySync:
     async  def sync_services(self, schema, period: pendulum.period = None):
         """All Services."""
         stream = "services"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
         services = await loop.run_in_executor(None, self.client.services)
@@ -267,7 +267,7 @@ class PagerdutySync:
     async def sync_escalationPolicies(self, schema):
         """All Escalation Policies."""
         stream = "escalationPolicies"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
         policies = await loop.run_in_executor(None, self.client.escalationPolicies)
@@ -278,7 +278,7 @@ class PagerdutySync:
     async def sync_teams(self, schema):
         """All Teams."""
         stream = "teams"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
         teams = await loop.run_in_executor(None, self.client.teams)
         if teams:
@@ -288,7 +288,7 @@ class PagerdutySync:
     async def sync_users(self, schema):
         """All Users."""
         stream = "users"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
         users = await loop.run_in_executor(None, self.client.users)
         if users:
@@ -298,7 +298,7 @@ class PagerdutySync:
     async def sync_vendors(self, schema):
         """All Vendors."""
         stream = "vendors"
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
         vendors = await loop.run_in_executor(None, self.client.vendors)
         if vendors:
