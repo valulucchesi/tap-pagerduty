@@ -46,7 +46,7 @@ class PagerdutyClient:
         response = self.session.get(url, params=params)
         response.raise_for_status()
 
-        return response
+        return response.json()
 
 
     def incidents(self, state, config):
@@ -65,7 +65,7 @@ class PagerdutyClient:
                     until = (start_date + datetime.timedelta(5*365/12))
                     query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + "&until="+ urllib.parse.quote(until.isoformat())
                     incidents = self._get(query)
-                    iterable = incidents.json()
+                    iterable = incidents
                     if 'incidents' in result:
                         result['incidents'].extend(iterable['incidents'])
                     else:
@@ -75,13 +75,13 @@ class PagerdutyClient:
                         offset = offset + result['limit']
                         query += "&offset=" + str(offset)
                         incidents = self._get(query)
-                        iterable = incidents.json()
+                        iterable = incidents
                         result['incidents'].extend(iterable['incidents'])
                     start_date = until
                     r = relativedelta.relativedelta(datetime.datetime.utcnow(), start_date)
             query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + '&until='+ urllib.parse.quote(datetime.datetime.utcnow().isoformat())
             incidents = self._get(query)
-            iterable = incidents.json()
+            iterable = incidents
             if 'incidents' in result:
                 result['incidents'].extend(iterable['incidents'])
             else:
@@ -91,110 +91,23 @@ class PagerdutyClient:
                 offset = offset + result['limit']
                 query += "&offset=" + str(offset)
                 incidents = self._get(query)
-                iterable = incidents.json()
+                iterable = incidents
                 result['incidents'].extend(iterable['incidents'])
             return result
         except:
             return None
 
-    def alerts(self, incident_id):
+    def getAll(self, stream):
         try:
-            query = f"incidents/{incident_id}/alerts?limit=100&total=true"
-            alerts = self._get(query)
-            iterable = alerts.json()
-            result = iterable
+            query = f"{stream}?limit=100&total=true"
+            result = self._get(query)
+            iterable = result
             offset = 0
             while iterable['more']:
-                offset = offset + result['limit']
+                offset = offset + iterable['limit']
                 query += "&offset=" + str(offset)
-                alerts = self._get(query)
-                iterable = alerts.json()
-                result += iterable
-            return result
-        except:
-            return None
-
-    def services(self):
-        try:
-            query = f"services?limit=100&total=true"
-            services = self._get(query)
-            iterable = services.json()
-            result = iterable
-            offset = 0
-            while iterable['more']:
-                offset = offset + result['limit']
-                query += "&offset=" + str(offset)
-                services = self._get(query)
-                iterable = services.json()
-                result += iterable
-            return result
-        except:
-            return None
-
-    def escalationPolicies(self):
-        try:
-            query = f"escalation_policies?limit=100&total=true"
-            policies = self._get(query)
-            iterable = policies.json()
-            result = iterable
-            offset = 0
-            while iterable['more']:
-                offset = offset + result['limit']
-                query += "&offset=" + str(offset)
-                policies = self._get(query)
-                iterable = policies.json()
-                result += iterable
-            return result
-        except:
-            return None
-
-    def teams(self):
-        try:
-            query = f"teams?limit=100&total=true"
-            teams = self._get(query)
-            iterable = teams.json()
-            result = iterable
-            offset = 0
-            while iterable['more']:
-                offset = offset + result['limit']
-                query += "&offset=" + str(offset)
-                teams = self._get(query)
-                iterable = teams.json()
-                result += iterable
-            return result
-        except:
-            return None
-
-    def users(self):
-        try:
-            query = f"users?limit=100&total=true"
-            users = self._get(query)
-            iterable = users.json()
-            result = iterable
-            offset = 0
-            while iterable['more']:
-                offset = offset + result['limit']
-                query += "&offset=" + str(offset)
-                users = self._get(query)
-                iterable = users.json()
-                result += iterable
-            return result
-        except:
-            return None
-
-    def vendors(self):
-        try:
-            query = f"vendors?limit=100&total=true"
-            vendors = self._get(query)
-            iterable = vendors.json()
-            result = iterable
-            offset = 0
-            while iterable['more']:
-                offset = offset + result['limit']
-                query += "&offset=" + str(offset)
-                vendors = self._get(query)
-                iterable = vendors.json()
-                result += iterable
+                iterable = self._get(query)
+                result[stream].extend(iterable[stream])
             return result
         except:
             return None
@@ -204,6 +117,7 @@ class PagerdutySync:
         self._client = client
         self._state = state
         self._config = config
+        self._incidents = self.client.incidents(state, config)
 
     @property
     def client(self):
@@ -232,9 +146,9 @@ class PagerdutySync:
         loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
-        if incidents:
-            for incident in incidents['incidents']:
+        #incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
+        if self._incidents:
+            for incident in self._incidents['incidents']:
                 singer.write_record(stream, incident)
             self.state = write_bookmark(self.state, stream, "since", datetime.datetime.utcnow().isoformat())
 
@@ -244,10 +158,11 @@ class PagerdutySync:
         loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
-        if incidents:
-            for incident in incidents['incidents']:
-                alerts = await loop.run_in_executor(None, self.client.alerts, incident['id'])
+        #incidents = await loop.run_in_executor(None, self.client.incidents, self.state, self.config)
+        if self._incidents:
+            for incident in self._incidents['incidents']:
+                query = 'incidents/' + incident['id'] + "/alerts"
+                alerts = await loop.run_in_executor(None, self.client.getAll, query)
                 if (alerts):
                     for alert in alerts['alerts']:
                         singer.write_record(stream, alert)
@@ -259,7 +174,7 @@ class PagerdutySync:
         loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        services = await loop.run_in_executor(None, self.client.services)
+        services = await loop.run_in_executor(None, self.client.getAll, 'services')
         if services:
             for service in services['services']:
                 singer.write_record(stream, service)
@@ -270,7 +185,7 @@ class PagerdutySync:
         loop = asyncio.get_event_loop()
 
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        policies = await loop.run_in_executor(None, self.client.escalationPolicies)
+        policies = await loop.run_in_executor(None, self.client.getAll, 'escalation_policies')
         if policies:
             for policie in policies['escalation_policies']:
                 singer.write_record(stream, policie)
@@ -280,7 +195,7 @@ class PagerdutySync:
         stream = "teams"
         loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        teams = await loop.run_in_executor(None, self.client.teams)
+        teams = await loop.run_in_executor(None, self.client.getAll, 'teams')
         if teams:
             for team in teams['teams']:
                 singer.write_record(stream, team)
@@ -290,7 +205,7 @@ class PagerdutySync:
         stream = "users"
         loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        users = await loop.run_in_executor(None, self.client.users)
+        users = await loop.run_in_executor(None, self.client.getAll, 'users')
         if users:
             for user in users['users']:
                 singer.write_record(stream, user)
@@ -300,7 +215,7 @@ class PagerdutySync:
         stream = "vendors"
         loop = asyncio.get_event_loop()
         singer.write_schema(stream, schema.to_dict(), ["id"])
-        vendors = await loop.run_in_executor(None, self.client.vendors)
+        vendors = await loop.run_in_executor(None, self.client.getAll, 'vendors')
         if vendors:
             for vendor in vendors['vendors']:
                 singer.write_record(stream, vendor)

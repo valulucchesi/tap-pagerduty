@@ -1,0 +1,11 @@
+{
+  "id":"id",
+  "name":"name",
+  "description":null,
+  "type":"team",
+  "summary":"sum",
+  "self":"https://api.pagerduty.com/teams/id",
+  "html_url":"https://split.pagerduty.com/teams/id",
+  "default_role":"default_role",
+  "parent":null
+}

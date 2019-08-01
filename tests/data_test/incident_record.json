@@ -1,0 +1,80 @@
+{
+  "incident_number":1,
+  "title":"Title",
+  "description":"Description",
+  "created_at":"2017-01-11T18:00:33Z",
+  "status":"status",
+  "incident_key":"key",
+  "service":{
+    "id":"id",
+    "type":"type",
+    "summary":"sum",
+    "self":null,
+    "html_url":null
+  },
+  "assignments":[
+
+  ],
+  "last_status_change_at":"2017-01-11T18:36:31Z",
+  "first_trigger_log_entry":{
+    "id":"id",
+    "type":"type",
+    "summary":"sum",
+    "self":"https://api.pagerduty.com/log_entries/id",
+    "html_url":"https://org.pagerduty.com/incidents/id/log_entries/id"
+  },
+  "alert_counts":{
+    "all":0,
+    "triggered":0,
+    "resolved":0
+  },
+  "is_mergeable":false,
+  "escalation_policy":{
+    "id":"id",
+    "type":"ref",
+    "summary":"Default",
+    "self":"https://api.pagerduty.com/escalation_policies/id",
+    "html_url":"https://org.pagerduty.com/escalation_policies/id"
+  },
+  "teams":[
+    {
+      "id":"id",
+      "type":"team_reference",
+      "summary":"sum",
+      "self":"https://api.pagerduty.com/teams/id",
+      "html_url":"https://org.pagerduty.com/teams/id"
+    }
+  ],
+  "pending_actions":[
+
+  ],
+  "acknowledgements":[
+
+  ],
+  "basic_alert_grouping":null,
+  "alert_grouping":null,
+  "last_status_change_by":{
+    "id":"id",
+    "type":"user_ref",
+    "summary":"name",
+    "self":"https://api.pagerduty.com/users/id",
+    "html_url":"https://org.pagerduty.com/users/id"
+  },
+  "priority":null,
+  "resolve_reason":null,
+  "incidents_responders":[
+
+  ],
+  "responder_requests":[
+
+  ],
+  "subscriber_requests":[
+
+  ],
+  "urgency":"high",
+  "id":"id",
+  "type":"incident",
+  "summary":"sum",
+  "self":"https://api.pagerduty.com/incidents/id",
+  "html_url":"https://org.pagerduty.com/incidents/id"
+}

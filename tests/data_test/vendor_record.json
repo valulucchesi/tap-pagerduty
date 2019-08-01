@@ -1,0 +1,19 @@
+{
+  "id":"id",
+  "type":"vendor",
+  "summary":"sum",
+  "self":"https://api.pagerduty.com/vendors/id",
+  "html_url":null,
+  "name":"name",
+  "website_url":"http://www.datadoghq.com/",
+  "long_name":"Datadog",
+  "logo_url":"url",
+  "thumbnail_url":"url",
+  "description":"description",
+  "integration_guide_url":"guide",
+  "connectable":true,
+  "generic_service_type":"service",
+  "alert_creation_default":"alert",
+  "alert_creation_editable":true,
+  "is_pd_cef":false
+}
