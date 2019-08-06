@@ -14,6 +14,7 @@ from pendulum import datetime, period
 import datetime
 from dateutil import relativedelta
 
+LOGGER = singer.get_logger()
 
 class PagerdutyAuthentication(requests.auth.AuthBase):
     def __init__(self, api_token: str):
@@ -54,7 +55,7 @@ class PagerdutyClient:
             bookmark = get_bookmark(state, "incidents", "since")
             query_base = f"incidents?limit=100&total=true&utc=true"
             if bookmark:
-                start_date = "&since=" + urllib.parse.quote(bookmark) + "&utc=true"
+                start_date = datetime.datetime.strptime(bookmark, '%Y-%m-%dT%H:%M:%S.%f')
             else:
                 start_date = datetime.datetime.strptime(config['start_date'], '%Y-%m-%d')
                 #query += "&since=" + urllib.parse.quote(start_date) + '&until='+ datetime.datetime.utcnow().isoformat()
@@ -63,7 +64,7 @@ class PagerdutyClient:
             if r.years > 0 or r.months >= 5:
                 while r.years > 0 or r.months >= 5:
                     until = (start_date + datetime.timedelta(5*365/12))
-                    query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + "&until="+ urllib.parse.quote(until.isoformat())
+                    query = query_base +  "&since=" + urllib.parse.quote(start_date.isoformat()) + "&utc=true" + "&until="+ urllib.parse.quote(until.isoformat())
                     incidents = self._get(query)
                     iterable = incidents
                     if 'incidents' in result:
@@ -94,7 +95,8 @@ class PagerdutyClient:
                 iterable = incidents
                 result['incidents'].extend(iterable['incidents'])
             return result
-        except:
+        except Exception as e:
+            LOGGER.error(e)
             return None
 
     def getAll(self, stream):
@@ -150,7 +152,7 @@ class PagerdutySync:
         if self._incidents:
             for incident in self._incidents['incidents']:
                 singer.write_record(stream, incident)
-            self.state = write_bookmark(self.state, stream, "since", datetime.datetime.utcnow().isoformat())
+            self.state = write_bookmark(self.state, stream, "since", datetime.datetime.utcnow().isoformat(timespec='milliseconds'))
 
     async def sync_alerts(self, schema, period: pendulum.period = None):
         """Alerts per incidents."""
